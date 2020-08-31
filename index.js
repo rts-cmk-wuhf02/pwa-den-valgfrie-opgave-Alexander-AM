@@ -5,19 +5,18 @@ const app = express();
 
 app.use(express.static("./www"));
 
-// Paths
-/*app.get("/api/*", (req, res) => {
-    res.json({ test: "test" });
-});*/
+// API paths
+const apiBase = "/.netlify/functions/";
 
-app.get("/api/*", function(req, res) {
+app.get(`${apiBase}*`, function(req, res) {
     let event, context;
     
-    require(`.${req.originalUrl}`).handler(event, context, (un, data) => {
+    require(`./api/${req.originalUrl.substring(apiBase.length)}`).handler(event, context, (un, data) => {
         res.status(data.statusCode).json(data.body);
     });
 });
 
+// General paths
 app.get("/*", (req, res) => {
     res.sendFile(req.url);
 });
