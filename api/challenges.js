@@ -1,9 +1,9 @@
 const faunadb = require("faunadb");
 
-console.log(process.env);
+//console.log(process.env);
 
 const dbClient = new faunadb.Client({
-    secret: process.env.FAUNADB_SECRET
+    secret: process.env.FAUNADB_SERVER_SECRET
 });
 
 exports.handler = async (event, context) => {
