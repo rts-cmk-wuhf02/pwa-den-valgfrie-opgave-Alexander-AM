@@ -1,6 +1,5 @@
 const express = require("express");
 const http = require("http");
-const fs = require("fs");
 const app = express();
 
 app.use(express.static("./www"));
@@ -8,12 +7,14 @@ app.use(express.static("./www"));
 // API paths
 const apiBase = "/.netlify/functions/";
 
-app.get(`${apiBase}*`, function(req, res) {
-    let event, context;
+app.get(`${apiBase}*`, async (req, res) => {
+    let event = {};
+    let context = {};
+
+    event.httpMethod = req.method;
     
-    require(`./api/${req.originalUrl.substring(apiBase.length)}`).handler(event, context, (un, data) => {
-        res.status(data.statusCode).json(data.body);
-    });
+    const data = await require(`./api/${req.originalUrl.substring(apiBase.length)}`).handler(event, context);
+    res.status(data.statusCode).json(data.body);
 });
 
 // General paths
