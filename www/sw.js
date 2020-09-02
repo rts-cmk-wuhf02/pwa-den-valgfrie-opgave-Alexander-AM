@@ -23,7 +23,12 @@ if (workbox) {
     /*workbox.precaching.precacheAndRoute([
         { url: "/", revision: null },
         { url: "/challenge", revision: null },
+        { url: "/execute", revision: null },
         { url: "/offline.html", revision: null },
+        { url: "/assets/js/app.js", revision: null },
+        { url: "/assets/js/challenge.js", revision: null },
+        { url: "/assets/js/execute.js", revision: null },
+        { url: "/assets/js/index.js", revision: null },
         { url: "/assets/css/style.css", revision: null },
         { url: "/assets/img/icon_192.png", revision: null },
         { url: "/assets/img/icon_512.png", revision: null },

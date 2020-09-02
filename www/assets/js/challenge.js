@@ -1,4 +1,33 @@
+/* IndexedDB Start */
+window.indexedDB =
+    window.indexedDB ||
+    window.mozIndexedDB ||
+    window.webkitIndexedDB ||
+    window.msIndexedDB;
+window.IDBTransaction = window.IDBTransaction ||
+    window.webkitIDBTransaction ||
+    window.msIDBTransaction || { READ_WRITE: "readwrite" };
+window.IDBKeyRange =
+    window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+/* IndexedDB End */
+
 document.addEventListener("DOMContentLoaded", async () => {
+    let db;
+
+    // Open database
+    let request = window.indexedDB.open("programming-challenges", 1);
+    request.onsuccess = (ev) => {
+        db = event.target.result;
+    };
+    request.onerror = (ev) => {
+        console.error("Application is not allowed to use IndexedDB.");
+    };
+    request.onupgradeneeded = (ev) => {
+        ev.target.result.createObjectStore("exe-scripts", {
+            keyPath: "id",
+        });
+    };
+
     const challengeTitleDOM = document.querySelector(".challenge-title-text");
     const challengeDescriptionDOM = document.querySelector(
         ".challenge-description-text"
@@ -7,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ".code-editor-editor"
     );
     const challengeExecuteButtonDOM = document.querySelector(".execute-button");
+    const codeCheckerDOM = document.querySelector(".code-checker");
 
     const challengeId = new URLSearchParams(location.search).get("id");
 
@@ -44,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const codeSplit = code
             .split(/(?:<span>)|(?:<\/span>)/)
             .filter((s) => s != "");
-        console.info(codeSplit);
 
         for (let i = 0; i < codeSplit.length; i++) {
             text += `${codeSplit[i].replace("<br>", "")}\n`;
@@ -59,16 +88,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         challengeCodeEditorDOM.innerHTML = parseTextToCode(challenge.code);
 
         challengeExecuteButtonDOM.addEventListener("click", () => {
-            console.log(parseCodeToText(challengeCodeEditorDOM.innerHTML));
-            const scriptElement = document.createElement("script");
+            const objectStore = db
+                .transaction(["exe-scripts"], "readwrite")
+                .objectStore("exe-scripts");
 
-            scriptElement.className = "code-editor-script";
-            scriptElement.async = true;
-            scriptElement.innerHTML = parseCodeToText(
-                challengeCodeEditorDOM.innerHTML
-            );
-
-            document.body.appendChild(scriptElement);
+            objectStore.put({
+                id: challengeId,
+                data: parseCodeToText(challengeCodeEditorDOM.innerHTML),
+            }).onsuccess = () => {
+                codeCheckerDOM.src = `/execute/?id=${challengeId}`;
+            };
         });
     }
 });
