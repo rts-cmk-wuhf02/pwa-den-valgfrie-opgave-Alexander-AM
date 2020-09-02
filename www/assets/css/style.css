@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap");
 
 body {
     margin: 0;
@@ -7,9 +7,14 @@ body {
     color: #505050;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
-    font-weight: 100;
 }
 
 h1 {
@@ -19,7 +24,8 @@ h1 {
     text-align: center;
 }
 
-input, button {
+input,
+button {
     font-family: "Roboto", sans-serif;
     font-weight: 100;
     border: 0;
@@ -104,22 +110,90 @@ header {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    position: relative;
+}
+
+/* Challenges Container */
+.challenges-container {
+    box-sizing: border-box;
+    padding: 160px 15px 30px 15px;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.challenges-container:empty::before {
+    content: "There's nothing here";
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    color: #909090;
+    letter-spacing: 3px;
+    font-weight: 400;
+}
+
+/* Challenge Container */
+@media screen and (max-width: 700px) {
+    .challenge-container {
+        flex-direction: column;
+    }
+}
+
+.challenge-container {
+    display: flex;
+}
+
+.challenge-container > section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.challenge-container .title {
+    width: 100%;
+    background-color: #505050;
+    color: #fff;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.challenge-container .execute-button {
+    background-color: #30c020;
+    color: #fff;
+    font-weight: 400;
+    outline: none;
+    transition: background-color 0.25s ease;
+}
+
+.challenge-container .execute-button:hover {
+    background-color: #40d030;
 }
 
 /* Main */
 main {
-    box-sizing: border-box;
-    padding: 160px 15px 60px 15px;
-    width: 100%;
-    height: 100%;
-    max-width: 650px;
-    margin: 0 auto;
+    flex-grow: 1;
 }
 
 /* Challenge */
 .challenge-wrapper {
     margin-bottom: 20px;
+    animation: challenge-in 0.4s ease-in-out forwards;
+}
+
+@keyframes challenge-in {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .challenge-wrapper a {
@@ -131,6 +205,12 @@ main {
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
     text-decoration: none;
     color: #393939;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.challenge-wrapper a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 18px 0px rgba(0, 0, 0, 0.15);
 }
 
 .challenge-wrapper p {
@@ -143,8 +223,7 @@ main {
 footer {
     text-align: center;
     padding: 10px;
-    border-top: 1px solid #505050;
-    position: absolute;
+    flex-shrink: 0;
     width: 100%;
     bottom: 0;
     box-sizing: border-box;
@@ -153,4 +232,62 @@ footer {
 footer p {
     font-size: 0.8rem;
     font-weight: 400;
+}
+
+/* Challenge Description Section */
+.challenge-description-section {
+    background-color: #e0e0e0;
+}
+
+.challenge-description {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-weight: 400;
+    outline: none;
+}
+
+/* Code Editor */
+.code-editor-section {
+    background-color: #303030;
+}
+
+.code-editor {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-weight: 400;
+    outline: none;
+    color: #fff;
+    font-family: monospace;
+    display: flex;
+    flex-grow: 1;
+    padding: 5px;
+    flex-direction: column;
+}
+
+.code-editor:focus {
+    outline: 1px solid #505050;
+}
+
+.code-editor-editor {
+    counter-reset: line;
+    outline: none;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+.code-editor-editor span {
+    display: flex;
+    line-height: 1.5rem;
+}
+
+.code-editor-editor span::before {
+    counter-increment: line;
+    content: counter(line);
+    padding: 0 10px;
+    margin-right: 10px;
+    display: inline-block;
+    border-right: 1px solid #fff9;
 }

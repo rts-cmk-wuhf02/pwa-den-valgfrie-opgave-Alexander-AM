@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Alexander-AM/pwa-programming-challenges#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faunadb": "^3.0.1"
   }

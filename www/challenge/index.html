@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Programming challenges on the go." />
+
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/assets/img/icon_512.png" />
+        <link rel="icon" href="/assets/img/icon_192.png" type="image/png" />
+        <link rel="stylesheet" href="/assets/css/style.css" />
+
+        <title>Programming Challenges</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <header>
+                <div class="pwa-install">
+                    <p>
+                        Would you like to
+                        <span class="pwa-install-button">install</span> the app?
+                    </p>
+                    <p class="pwa-dismiss-button">&#x26cc;</p>
+                </div>
+            </header>
+
+            <main class="challenge-container">
+                <section class="challenge-description-section">
+                    <section class="title">
+                        <h2>Challenge Description</h2>
+                    </section>
+                    <div class="challenge-description">
+                        <h3 class="challenge-title-text"></h3>
+                        <p class="challenge-description-text"></p>
+                    </div>
+                </section>
+                <section class="code-editor-section">
+                    <section class="title">
+                        <h2>Code Editor</h2>
+                        <button class="execute-button">Run</button>
+                    </section>
+                    <section class="code-editor">
+                        <div contenteditable class="code-editor-editor"></div>
+                    </section>
+                </section>
+            </main>
+        </div>
+
+        <script src="/assets/js/app.js"></script>
+        <script src="/assets/js/challenge.js"></script>
+    </body>
+</html>

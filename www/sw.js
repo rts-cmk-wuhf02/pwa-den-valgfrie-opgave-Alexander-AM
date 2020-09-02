@@ -1,4 +1,6 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js");
+importScripts(
+    "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
+);
 /*importScripts("https://unpkg.com/idb@5.0.4/build/iife/index-min.js");
 
 let db;
@@ -17,23 +19,23 @@ if(idb) {
     });
 }*/
 
-
 if (workbox) {
-    workbox.precaching.precacheAndRoute([
-        { url: "/index.html", revision: null },
+    /*workbox.precaching.precacheAndRoute([
+        { url: "/", revision: null },
+        { url: "/challenge", revision: null },
         { url: "/offline.html", revision: null },
         { url: "/assets/css/style.css", revision: null },
         { url: "/assets/img/icon_192.png", revision: null },
         { url: "/assets/img/icon_512.png", revision: null },
-    ]);
+    ]);*/
 
     workbox.routing.registerRoute(
         () => true,
-        new workbox.strategies.NetworkFirst()
+        new workbox.strategies.StaleWhileRevalidate()
     );
 
     workbox.routing.setCatchHandler(({ event }) => {
-        if(event.request.destination === "/offline.html") {
+        if (event.request.destination === "/offline.html") {
             return caches.match("/offline.html");
         } else {
             return Response.error();

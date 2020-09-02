@@ -1,86 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="apple-touch-icon" href="/assets/img/icon_512.png">
-    <link rel="icon" href="/assets/img/icon_192.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/assets/img/icon_512.png" />
+        <link rel="icon" href="/assets/img/icon_192.png" type="image/png" />
+        <link rel="stylesheet" href="/assets/css/style.css" />
 
-    <title>Programming Challenges</title>
-</head>
-<body>
+        <title>Programming Challenges</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <header>
+                <div class="pwa-install">
+                    <p>
+                        Would you like to
+                        <span class="pwa-install-button">install</span> the app?
+                    </p>
+                    <p class="pwa-dismiss-button">&#x26cc;</p>
+                </div>
 
-    <div class="page-wrapper">
-        <header>
-            <div class="pwa-install">
-                <p>Would you like to <span class="pwa-install-button">install</span> the app?</p>
-                <p class="pwa-dismiss-button">&#x26cc;</p>
-            </div>
-    
-            <div class="title-wrapper">
-                <h1 class="title">Programming Challenges</h1>
-            </div>
-        </header>
-    
-        <main>
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=1">
-                    <p>Challenge #1</p>
-                </a>
-            </article>
-    
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=2">
-                    <p>Challenge #2</p>
-                </a>
-            </article>
-    
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
+                <div class="title-wrapper">
+                    <h1 class="title">Programming Challenges</h1>
+                </div>
+            </header>
 
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
+            <main class="challenges-container"></main>
 
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
+            <footer>
+                <p>Copyright (c) MadCreativity 2020</p>
+            </footer>
+        </div>
 
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
-
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
-
-            <article class="challenge-wrapper">
-                <a href="/challenges/?p=3">
-                    <p>Challenge #3</p>
-                </a>
-            </article>
-        </main>
-    
-        <footer>
-            <p>Copyright (c) MadCreativity 2020</p>
-        </footer>
-    </div>
-
-    <script src="/assets/js/app.js"></script>
-
-</body>
+        <script src="/assets/js/app.js"></script>
+        <script src="/assets/js/index.js"></script>
+    </body>
 </html>
