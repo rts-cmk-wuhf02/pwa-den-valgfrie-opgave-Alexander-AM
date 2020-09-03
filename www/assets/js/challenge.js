@@ -1,32 +1,5 @@
-/* IndexedDB Start */
-window.indexedDB =
-    window.indexedDB ||
-    window.mozIndexedDB ||
-    window.webkitIndexedDB ||
-    window.msIndexedDB;
-window.IDBTransaction = window.IDBTransaction ||
-    window.webkitIDBTransaction ||
-    window.msIDBTransaction || { READ_WRITE: "readwrite" };
-window.IDBKeyRange =
-    window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-/* IndexedDB End */
-
 document.addEventListener("DOMContentLoaded", async () => {
-    let db;
-
-    // Open database
-    let request = window.indexedDB.open("programming-challenges", 1);
-    request.onsuccess = (ev) => {
-        db = event.target.result;
-    };
-    request.onerror = (ev) => {
-        console.error("Application is not allowed to use IndexedDB.");
-    };
-    request.onupgradeneeded = (ev) => {
-        ev.target.result.createObjectStore("exe-scripts", {
-            keyPath: "id",
-        });
-    };
+    initDatabase();
 
     const challengeTitleDOM = document.querySelector(".challenge-title-text");
     const challengeDescriptionDOM = document.querySelector(
@@ -56,12 +29,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const parseTextToCode = (text) => {
         let code = "";
-        const textSplit = text.split("\n");
+        const textSplit = decodeURIComponent(text).split("\n");
 
         for (let i = 0; i < textSplit.length; i++) {
             code += `<span>${
                 textSplit[i]
-                    ? textSplit[i].replace("<", "&lt;").replace(">", "&gt;")
+                    ? textSplit[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")
                     : "<br>"
             }</span>`;
         }
@@ -76,11 +49,26 @@ document.addEventListener("DOMContentLoaded", async () => {
             .filter((s) => s != "");
 
         for (let i = 0; i < codeSplit.length; i++) {
-            text += `${codeSplit[i].replace("<br>", "")}\n`;
+            text += `${codeSplit[i]
+                .replace(/<br>/g, "")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&nbsp;/g, " ")}\n`;
         }
 
         return text;
     };
+
+    window.addEventListener(
+        "message",
+        (e) => {
+            if (e.origin == location.origin) {
+                console.log(e.data);
+                challengeExecuteButtonDOM.classList.remove("running");
+            }
+        },
+        false
+    );
 
     if (challenge !== null) {
         challengeTitleDOM.innerText = challenge.title;
@@ -88,16 +76,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         challengeCodeEditorDOM.innerHTML = parseTextToCode(challenge.code);
 
         challengeExecuteButtonDOM.addEventListener("click", () => {
-            const objectStore = db
-                .transaction(["exe-scripts"], "readwrite")
-                .objectStore("exe-scripts");
+            if (!challengeExecuteButtonDOM.classList.contains("running")) {
+                const objectStore = db
+                    .transaction(["exe-scripts"], "readwrite")
+                    .objectStore("exe-scripts");
 
-            objectStore.put({
-                id: challengeId,
-                data: parseCodeToText(challengeCodeEditorDOM.innerHTML),
-            }).onsuccess = () => {
-                codeCheckerDOM.src = `/execute/?id=${challengeId}`;
-            };
+                let request = objectStore.put({
+                    id: challengeId,
+                    data: parseCodeToText(challengeCodeEditorDOM.innerHTML),
+                });
+                request.onsuccess = (ev) => {
+                    codeCheckerDOM.src = `/execute/?id=${challengeId}`;
+                };
+
+                challengeExecuteButtonDOM.classList.add("running");
+            }
         });
     }
 });

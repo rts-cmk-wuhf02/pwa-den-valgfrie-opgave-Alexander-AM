@@ -160,6 +160,7 @@ header {
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .challenge-container .execute-button {
@@ -172,6 +173,12 @@ header {
 
 .challenge-container .execute-button:hover {
     background-color: #40d030;
+    cursor: pointer;
+}
+
+.challenge-container .execute-button.running {
+    cursor: default;
+    background-color: #109010;
 }
 
 /* Main */
@@ -278,12 +285,12 @@ footer p {
     flex-grow: 1;
 }
 
-.code-editor-editor span {
+.code-editor-editor > span {
     display: flex;
     line-height: 1.5rem;
 }
 
-.code-editor-editor span::before {
+.code-editor-editor > span::before {
     counter-increment: line;
     content: counter(line);
     padding: 0 10px;

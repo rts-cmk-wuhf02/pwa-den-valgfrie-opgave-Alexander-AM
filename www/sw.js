@@ -19,6 +19,8 @@ if(idb) {
     });
 }*/
 
+self.__WB_DISABLE_DEV_LOGS = true;
+
 if (workbox) {
     /*workbox.precaching.precacheAndRoute([
         { url: "/", revision: null },
@@ -47,5 +49,5 @@ if (workbox) {
         }
     });
 } else {
-    console.log("Workbox failed to load.");
+    console.error("Workbox failed to load.");
 }
