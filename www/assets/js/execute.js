@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             );
 
                             scriptElement.innerText = `
-                            parent.postMessage((() => {
+                            parent.postMessage({ id: ${test.id}, data: (() => {
                                 const dataset = ${JSON.stringify(test.input)};
                                 
                                 ${userScript}
-                            })());
+                            }})());
                             `;
 
                             scriptElement.async = true;
