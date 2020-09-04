@@ -7,12 +7,16 @@ Opgaven har til formål at, demonstrere at **koncepterne fra PWA undervisningen*
 # Projektet skal indeholde følgende
 
 **Indledende opgave**<br>
-_Du skal ikke bruge yderligere tid på at forfinde disse. Du har allerede lavet dem, aflever dem som de er!_ 0. Et udfyldt **koncept** (den udleverede pdf)
+_Du skal ikke bruge yderligere tid på at forfinde disse. Du har allerede lavet dem, aflever dem som de er!_
+
+0. Et udfyldt **koncept** (den udleverede pdf)
 
 1. En 'feature-liste' hvor **main feature** er fremhævet
 2. Et illustreret **userflow** for main feature ex. (find sko, køb sko, følg ordre, modtag ordre)
 
-**Koncepterne fra PWA undervisningen** 0. Custom install UI element
+**Koncepterne fra PWA undervisningen**
+
+0. Custom install UI element
 
 1. Pre-cache (The App Shell Model)
 2. Generic Fallback (Custom offline side)
