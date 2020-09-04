@@ -146,6 +146,16 @@ header {
     flex-grow: 1;
 }
 
+.challenge-container-main > section {
+    width: 50%;
+}
+
+@media screen and (max-width: 700px) {
+    .challenge-container-main > section {
+        width: 100%;
+    }
+}
+
 .challenge-container-main {
     display: flex;
     flex-grow: 1;
@@ -267,7 +277,7 @@ footer p {
 
 /* Code Editor */
 .code-editor-section {
-    background-color: #303030;
+    background-color: #1e1e1e;
 }
 
 .code-editor {
@@ -362,4 +372,48 @@ footer p {
 
 .code-tests > li > p {
     font-weight: 400;
+}
+
+/* Code Mirror */
+.CodeMirror {
+    background: transparent;
+    color: white;
+    flex-grow: 1;
+}
+
+.CodeMirror .cm-keyword {
+    color: #569cd6;
+}
+
+.CodeMirror .cm-def {
+    color: inherit;
+}
+
+.CodeMirror .cm-atom {
+    color: #569cd6;
+}
+
+.CodeMirror .cm-variable {
+    color: #3dc9b0;
+}
+
+.CodeMirror .cm-variable-2 {
+    color: inherit;
+}
+
+.CodeMirror .cm-number {
+    color: #b5cea8;
+}
+
+.CodeMirror .cm-string {
+    color: #ce9178;
+}
+
+.CodeMirror .cm-comment {
+    color: #608b4e;
+}
+
+.CodeMirror .cm-tab,
+.CodeMirror [cm-text] {
+    border-left: 1px solid #454545;
 }

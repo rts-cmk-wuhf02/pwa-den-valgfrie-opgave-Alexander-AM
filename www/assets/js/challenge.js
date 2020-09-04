@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    initDatabase();
-
     const challengeTitleDOM = document.querySelector(".challenge-title-text");
     const challengeDescriptionDOM = document.querySelector(
         ".challenge-description-text"
@@ -13,6 +11,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     const codeTestsDOM = document.querySelector(".code-tests");
 
     const challengeId = new URLSearchParams(location.search).get("id");
+
+    const codeMirrorEditor = CodeMirror(
+        (elt) => {
+            challengeCodeEditorDOM.parentNode.replaceChild(
+                elt,
+                challengeCodeEditorDOM
+            );
+        },
+        {
+            value: "",
+            mode: "javascript",
+        }
+    );
+
+    initDatabase();
 
     const challenge = await fetch(`/.netlify/functions/challenges-get-all`)
         .then((e) => e.text())
