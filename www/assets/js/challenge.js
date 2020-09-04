@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
+    let tests = [];
+    const _BLANK = {};
+
     const parseTextToCode = (text) => {
         let code = "";
         const textSplit = decodeURIComponent(text).split("\n");
@@ -65,9 +68,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         "message",
         (e) => {
             if (e.origin == location.origin) {
-                dialog(JSON.stringify(e.data));
-                navigator.vibrate([100, 50, 100]);
-                challengeExecuteButtonDOM.classList.remove("running");
+                tests[e.data.id] = e.data.data;
+                let correct = 1;
+
+                for (let i = 0; i < challenge.tests.length; i++) {
+                    if (
+                        tests[challenge.tests[i].id] !=
+                        challenge.tests[i].output
+                    ) {
+                        correct = 0;
+                        break;
+                    }
+
+                    if (tests[challenge.tests[i].id] == _BLANK) {
+                        correct = 2;
+                        break;
+                    }
+                }
+
+                if (correct == 1) {
+                    navigator.vibrate([100, 50, 100]);
+                    dialog("You have successfully completed the challenge.");
+                }
+
+                if (correct < 2) {
+                    challengeExecuteButtonDOM.classList.remove("running");
+                }
             }
         },
         false
@@ -89,6 +115,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     data: parseCodeToText(challengeCodeEditorDOM.innerHTML),
                 });
                 request.onsuccess = (ev) => {
+                    tests = challenge.tests.map((test) => {
+                        return _BLANK;
+                    });
                     codeCheckerDOM.src = `/execute/?id=${challengeId}`;
                 };
 
