@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             scriptElement.innerText = `
                             parent.postMessage({ id: ${test.id}, data: (() => {
-                                const dataset = ${JSON.stringify(test.input)};
+                                const dataset = (pos) => {
+                                    return ${JSON.stringify(test.input)}[pos];
+                                };
                                 
                                 ${userScript}
                             })()});

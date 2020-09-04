@@ -161,6 +161,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .challenge-container .execute-button {
@@ -307,4 +310,49 @@ footer p {
     height: 0;
     border: 0;
     pointer-events: none;
+}
+
+/* Code Tests */
+.challenge-container > .code-tests-section {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.code-tests {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #303030;
+    color: #fff;
+}
+
+.code-tests > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+}
+
+.code-tests > li::after {
+    content: "";
+    width: 0px;
+    height: 3px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: width 0.25s ease;
+}
+
+.code-tests > li.incorrect::after {
+    background-color: #e02626;
+    width: 100%;
+}
+
+.code-tests > li.correct::after {
+    background-color: #26e026;
+    width: 100%;
+}
+
+.code-tests > li > p {
+    font-weight: 400;
 }

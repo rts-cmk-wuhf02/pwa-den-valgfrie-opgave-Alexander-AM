@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     const challengeExecuteButtonDOM = document.querySelector(".execute-button");
     const codeCheckerDOM = document.querySelector(".code-checker");
+    const codeTestsDOM = document.querySelector(".code-tests");
 
     const challengeId = new URLSearchParams(location.search).get("id");
 
@@ -29,8 +30,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
+    challenge.tests.forEach((test) => {
+        codeTestsDOM.innerHTML += `
+            <li id="code-test-${test.id}"><p>Input: ${JSON.stringify(
+            test.input
+        )}</p><p>Output: ${JSON.stringify(test.output)}</p></li>
+        `;
+    });
+
     let tests = [];
-    const _BLANK = {};
+    const _BLANK = [];
 
     const parseTextToCode = (text) => {
         let code = "";
@@ -72,17 +81,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 let correct = 1;
 
                 for (let i = 0; i < challenge.tests.length; i++) {
-                    if (
-                        tests[challenge.tests[i].id] !=
-                        challenge.tests[i].output
-                    ) {
-                        correct = 0;
-                        break;
-                    }
+                    const testId = challenge.tests[i].id;
 
-                    if (tests[challenge.tests[i].id] == _BLANK) {
+                    if (tests[testId] == _BLANK) {
                         correct = 2;
                         break;
+                    } else {
+                        if (tests[testId] != challenge.tests[i].output) {
+                            correct = 0;
+                            document
+                                .querySelector(`#code-test-${testId}`)
+                                .classList.add("incorrect");
+                        } else {
+                            document
+                                .querySelector(`#code-test-${testId}`)
+                                .classList.add("correct");
+                        }
                     }
                 }
 
@@ -116,6 +130,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 });
                 request.onsuccess = (ev) => {
                     tests = challenge.tests.map((test) => {
+                        document
+                            .querySelector(`#code-test-${test.id}`)
+                            .classList.remove("correct", "incorrect");
                         return _BLANK;
                     });
                     codeCheckerDOM.src = `/execute/?id=${challengeId}`;
