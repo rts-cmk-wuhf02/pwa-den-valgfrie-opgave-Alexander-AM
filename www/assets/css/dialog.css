@@ -1,0 +1,74 @@
+body.body-dialog {
+    overflow: hidden;
+}
+
+.dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: fleX;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    transition: visibility 0.25s ease, opacity 0.25s ease;
+}
+
+body.body-dialog .dialog-wrapper {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dialog {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 200px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 20px;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+body.body-dialog .dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+@media screen and (min-width: 800px) {
+    .dialog {
+        max-width: 50%;
+    }
+}
+
+.dialog-button-container {
+    text-align: right;
+}
+
+.dialog-button {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    padding: 8px 20px;
+    min-width: 70px;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dialog-text {
+    font-weight: 400;
+    margin: 0.5em 0;
+}
+
+.dialog-button:hover {
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-color: #777;
+}

@@ -65,9 +65,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         "message",
         (e) => {
             if (e.origin == location.origin) {
-                console.log(e.data);
-                challengeExecuteButtonDOM.classList.remove("running");
+                dialog(JSON.stringify(e.data));
                 navigator.vibrate([100, 50, 100]);
+                challengeExecuteButtonDOM.classList.remove("running");
             }
         },
         false
