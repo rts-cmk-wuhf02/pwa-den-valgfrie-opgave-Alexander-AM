@@ -12,23 +12,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const challengeId = new URLSearchParams(location.search).get("id");
 
-    const codeMirrorEditor = CodeMirror(
-        (elt) => {
-            challengeCodeEditorDOM.parentNode.replaceChild(
-                elt,
-                challengeCodeEditorDOM
-            );
-        },
-        {
-            value: "",
-            mode: "javascript",
-        }
-    );
-
     initDatabase();
 
     const challenge = await fetch(`/.netlify/functions/challenges-get-all`)
-        .then((e) => e.text())
+        .then((e) => e.json())
         .then((data) => {
             data = JSON.parse(data);
 
@@ -56,7 +43,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const parseTextToCode = (text) => {
         let code = "";
-        const textSplit = decodeURIComponent(text).split("\n");
+        const textSplit = decodeURIComponent(
+            text
+        ); /*.split("\n");
 
         for (let i = 0; i < textSplit.length; i++) {
             code += `<span>${
@@ -64,7 +53,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     ? textSplit[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")
                     : "<br>"
             }</span>`;
-        }
+        }*/
+        code = textSplit;
 
         return code;
     };
@@ -127,9 +117,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     if (challenge !== null) {
+        const codeMirrorEditor = CodeMirror(
+            (elt) => {
+                challengeCodeEditorDOM.parentNode.replaceChild(
+                    elt,
+                    challengeCodeEditorDOM
+                );
+            },
+            {
+                value: parseTextToCode(challenge.code),
+                mode: "javascript",
+                lineNumbers: true,
+            }
+        );
+
         challengeTitleDOM.innerText = challenge.title;
         challengeDescriptionDOM.innerText = challenge.description;
-        challengeCodeEditorDOM.innerHTML = parseTextToCode(challenge.code);
 
         challengeExecuteButtonDOM.addEventListener("click", () => {
             if (!challengeExecuteButtonDOM.classList.contains("running")) {
@@ -139,7 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 let request = objectStore.put({
                     id: challengeId,
-                    data: parseCodeToText(challengeCodeEditorDOM.innerHTML),
+                    data: codeMirrorEditor.getValue(),
                 });
                 request.onsuccess = (ev) => {
                     tests = challenge.tests.map((test) => {

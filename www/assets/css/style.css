@@ -381,6 +381,11 @@ footer p {
     flex-grow: 1;
 }
 
+.CodeMirror-gutters {
+    background-color: transparent;
+    border-right-color: #505050;
+}
+
 .CodeMirror .cm-keyword {
     color: #569cd6;
 }
@@ -394,7 +399,7 @@ footer p {
 }
 
 .CodeMirror .cm-variable {
-    color: #3dc9b0;
+    color: inherit;
 }
 
 .CodeMirror .cm-variable-2 {

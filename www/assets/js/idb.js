@@ -44,7 +44,7 @@ const getChallenges = () => {
             if (ev.target.result.length == 0) {
                 resolve(
                     await fetch("/.netlify/functions/challenges-get-all")
-                        .then((e) => e.text())
+                        .then((e) => e.json())
                         .then((data) => {
                             data = JSON.parse(data);
 

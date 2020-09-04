@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             scriptElement.async = true;
                             document.body.appendChild(scriptElement);
-                            document.body.removeChild(scriptElement);
+                            //document.body.removeChild(scriptElement);
                         }
                     );
                 });

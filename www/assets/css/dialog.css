@@ -5,6 +5,7 @@ body.body-dialog {
 .dialog-wrapper {
     position: fixed;
     top: 0;
+    z-index: 1000;
     left: 0;
     width: 100vw;
     height: 100vh;
