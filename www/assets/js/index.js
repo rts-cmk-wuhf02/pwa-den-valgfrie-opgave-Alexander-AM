@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     const challenges = await fetch("/.netlify/functions/challenges-get-all")
-        .then((e) => e.json())
+        .then((e) => e.text())
         .then((data) => {
+            data = JSON.parse(data);
             return data.error ? null : data.data;
         });
 

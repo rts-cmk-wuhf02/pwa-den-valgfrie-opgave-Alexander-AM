@@ -14,8 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const challengeId = new URLSearchParams(location.search).get("id");
 
     const challenge = await fetch(`/.netlify/functions/challenges-get-all`)
-        .then((e) => e.json())
+        .then((e) => e.text())
         .then((data) => {
+            data = JSON.parse(data);
+
             if (!data.error) {
                 for (let i = 0; i < data.data.length; i++) {
                     if (data.data[i].id == challengeId) {
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (e.origin == location.origin) {
                 console.log(e.data);
                 challengeExecuteButtonDOM.classList.remove("running");
+                navigator.vibrate([100, 50, 100]);
             }
         },
         false
@@ -94,3 +97,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 });
+
+// Notifications
+/*const displayNotification = () => {
+    if(Notification.permission == "granted") {
+        navigator.serviceWorker.getRegistration().then((reg) => {
+            console.log(reg);
+
+            reg.showNotification("Hello.", {
+                body: "Notification body.",
+                icon: "mario.png",
+                data: {
+                    dateOfArrival: Date.now(),
+                    primaryKey: 1,
+                },
+            });
+        });
+    }
+};
+
+Notification.requestPermission().then((status) => {
+    console.log("Notification status: ", status);
+
+    //displayNotification();
+});
+
+document.querySelector(".message").addEventListener("click", () => {
+    displayNotification();
+});*/

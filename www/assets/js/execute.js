@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 const dataset = ${JSON.stringify(test.input)};
                                 
                                 ${userScript}
-                            }})());
+                            })()});
                             `;
 
                             scriptElement.async = true;
