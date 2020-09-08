@@ -1,5 +1,8 @@
 # PWA-den-valgfrie-opgave
 
+# [Hosted på Netlify](https://confident-mahavira-ffcbed.netlify.app/)
+
+
 # Formål:
 
 Opgaven har til formål at, demonstrere at **koncepterne fra PWA undervisningen** kan anvendes i praksis i fremstillingen at et produkt.
@@ -38,7 +41,3 @@ Dit projekt skal derfor integreres med:
 # Build, test, and learn!
 
 God arbejdslyst...
-
-# URL
-
-[https://confident-mahavira-ffcbed.netlify.app/]()
