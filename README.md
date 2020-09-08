@@ -1,7 +1,6 @@
 # PWA-den-valgfrie-opgave
 
-# [Hosted på Netlify](https://confident-mahavira-ffcbed.netlify.app/)
-
+# [https://confident-mahavira-ffcbed.netlify.app/](https://confident-mahavira-ffcbed.netlify.app/)
 
 # Formål:
 
@@ -41,3 +40,36 @@ Dit projekt skal derfor integreres med:
 # Build, test, and learn!
 
 God arbejdslyst...
+
+# Featurelist
+
+-   **Hver udfordring har en code editor, en forklaring, eksempel(er), og et tjek for at se om de givne svar er rigtige.**
+-   Udfordringerne hentes fra en server.
+-   Når en udfordring er færdig, gem data om udførelse på server.
+-   Gem ufærdig kode lokalt og udfordringer i cache.
+
+# Userflow
+
+0. Find udfordring.
+1. Læs beskrivelse af udfordring.
+2. Skriv kode til at løse udfordring.
+3. Kør kode.
+4. Sammenlig eget svar med rigtige svar fra tests.
+
+# Koncept
+
+Hvad er formålet med projektet? Hvad er det for et problem, som projektet forsøger at løse?
+
+-   Projektet forsøger at løse manglen på to-go programmeringsøvelser.
+
+Hvem er målgruppen for projektet? Hvem er det, projektet hjælper?
+
+-   Målgruppen er udviklere, som mig selv, der tit får inspiration til at udvikle når de er væk fra computeren, men ikke har nogle gode mobile alternativer.
+
+Hvilke konkrete aktiviteter består projektet af?
+
+-   Projektet er en Progressive Web App (PWA), som fungerer både som en normal hjemmeside og som en mobil app.
+
+Hvordan hænger projektets aktiviteter sammen med projektets formåil.
+
+-   Projektet giver målgruppen muligheden for at øve sig, og holde sig skarp, mens man er væk fra computeren.
